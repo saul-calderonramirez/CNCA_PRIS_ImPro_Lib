@@ -218,7 +218,7 @@ ImageImPro** OpenImProLib_OpenCvImpl::getCounturedObjectMask(ImageImPro* ptrMask
             unsigned char value = ptrMask->getPV(x, y);
             if( value == objectMaskTag){
                 ptrOutput->setPV(x - minX, y - minY, ptrInput->getPV_RGB(x, y));
-                ptrOutputMask->setPV(x - minX, y - minY, 255);
+                ptrOutputMask->setPV(x - minX, y - minY, 255, 0);
             }
         }
     }
@@ -228,12 +228,15 @@ ImageImPro** OpenImProLib_OpenCvImpl::getCounturedObjectMask(ImageImPro* ptrMask
     return ptrArray;
 }
 
-vector<double> OpenImProLib_OpenCvImpl::getDensityFunction(ImageImPro* ptrInput, ImageImPro* ptrMask, int layer){
-    vector<double> histogram(256);
+vector<float> OpenImProLib_OpenCvImpl::getDensityFunction(ImageImPro* ptrInput, ImageImPro* ptrMask, int layer){
+    vector<float> histogram(256);
     unsigned char value;
+    ptrInput->showImageOnWindow("Capa H recibida por getDensityFunction");
+    ptrMask->showImageOnWindow("Mascara recibida por getDensityFunction");
     for(int x = 0; x < ptrInput->getSize().width; ++x){
         for(int y = 0; y < ptrInput->getSize().height; ++y){
-            if(ptrMask->getPV(x, y) == 255){
+            cout << "Mascara: x "<< x << " y: " << y << " valor " << (int)ptrMask->getPV(x, y) << endl;
+            if((unsigned char)ptrMask->getPV(x, y) == 255){
                 value = (unsigned char)ptrInput->getPV(x, y, layer);
                 histogram[value]++;
             }

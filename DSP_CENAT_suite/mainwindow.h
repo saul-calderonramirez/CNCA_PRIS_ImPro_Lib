@@ -36,7 +36,7 @@ private slots:
     void on_btnContour_3_clicked();
 
     void on_btnKittler_clicked();
-    void displayHOGHistogram(vector<float> descriptorValues);
+    void displayHistogram(vector<float> descriptorValues);
 
     void on_btnHSV_clicked();
 

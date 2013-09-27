@@ -10,7 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = ImProc_suite
 TEMPLATE = app
-LIBS += -L/usr/local/lib -lfann -lcuda -lcudart
+LIBS += -L/usr/local/lib #-lfann -lcuda -lcudart
 SOURCES += main.cpp\
     imageimpro.cpp \
     openimprolib.cpp \

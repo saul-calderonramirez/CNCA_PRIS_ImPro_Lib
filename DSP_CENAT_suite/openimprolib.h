@@ -64,7 +64,7 @@ public:
     //returns an image with 1's where the object is and 0
     virtual ImageImPro** getCounturedObjectMask(ImageImPro* ptrMask, ImageImPro* ptrInput, int objectMaskTag) = 0;
 
-    virtual vector<double> getDensityFunction(ImageImPro* ptrInput, ImageImPro* ptrMask, int layer) = 0;
+    virtual vector<float> getDensityFunction(ImageImPro* ptrInput, ImageImPro* ptrMask, int layer) = 0;
 
     virtual ~OpenImProLib(){}
 };

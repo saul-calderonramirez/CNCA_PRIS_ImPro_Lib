@@ -27,6 +27,6 @@
 #include <fstream>
 #include <dirent.h>
 #include <assert.h>
-#include <cuda.h>
-#include <cuda_runtime_api.h>
+/*#include <cuda.h>
+#include <cuda_runtime_api.h>*/
 #endif

@@ -20,9 +20,7 @@ void Controller::loadImage(char* ptrName)throw (ControllerException){
 }
 
 void Controller::applyFilterCanny()throw (ControllerException){
-    cudaEvent_t	start, stop;
-    cudaEventCreate(&start);
-        cudaEventCreate(&stop);
+
     if(this->ptrImage != NULL){
         ImageImPro* ptrImageCanny = this->ptrLibGPU->filterCanny(this->ptrImage, 10, 500, 3);
         delete this->ptrImage;
@@ -42,22 +40,25 @@ void Controller::runBenchmarks()throw (ControllerException){
          throw ControllerException("No image loaded");
     }
 }
-
- void Controller::findCountour()throw (ControllerException){
+//El color FUCSIA ES IGUAL AL MAGENTA
+ vector<float> Controller::findCountour()throw (ControllerException){
+     vector<float> densityFunction;
      if(this->ptrImage != NULL){
-        ImageImPro* ptrTemp = this->ptrLib->thresholdEqualsRGB(this->ptrImage, RGB_VALUE(FUCSIA));
-        ptrTemp->showImageOnWindow("AfterThreshEquals");
-        ImageImPro** ptrTemp2 = this->ptrLib->getCounturedObjectMask(ptrTemp, this->ptrImage, 253);
-        ptrTemp2[0]->showImageOnWindow("AfterGettingObject");
-        ptrTemp2[1]->showImageOnWindow("AfterGettingObject");
-        delete ptrTemp2[0];
-        delete ptrTemp2[1];
-        delete ptrTemp;
-
+        ImageImPro* ptrThresholded = this->ptrLib->thresholdEqualsRGB(this->ptrImage, RGB_VALUE(FUCSIA));
+        ptrThresholded->showImageOnWindow("AfterThreshEquals");
+        ImageImPro** ptrMaskedObj = this->ptrLib->getCounturedObjectMask(ptrThresholded, this->ptrImage, 255);
+       /* ptrMaskedObj[0]->showImageOnWindow("AfterGettingObject_Original_image");
+        ptrMaskedObj[1]->showImageOnWindow("AfterGettingObject_Mask");*/
+        //Translated to HSV
+        ImageImPro* ptrMaskedObjHSV = ptrMaskedObj[0]->getHSV();
+        ImageImPro* ptrMaskedObjH = ptrMaskedObjHSV->getLayer(0);
+       // ptrMaskedObjH->showImageOnWindow("Object H layer");
+        densityFunction = this->ptrLib->getDensityFunction(ptrMaskedObjH,ptrMaskedObj[1], 0);
      }
      else{
           throw ControllerException("No image loaded");
      }
+     return densityFunction;
  }
 
 void Controller::applyFilterSobel()throw (ControllerException){

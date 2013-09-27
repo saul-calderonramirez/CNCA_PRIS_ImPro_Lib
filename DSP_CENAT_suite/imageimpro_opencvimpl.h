@@ -27,6 +27,7 @@ public:
     IplImage* getOpenCvImage();
     ImageImPro* getGrayScale();
     ImageImPro* getHSV();
+    ImageImPro* getLayer(int layer);
     void loadImage(char* ptrName);
     void createImage(ImSize size, ImageImProDepth depth, int channels);
 

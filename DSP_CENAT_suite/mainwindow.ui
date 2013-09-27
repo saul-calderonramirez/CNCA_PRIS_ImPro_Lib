@@ -74,11 +74,11 @@
        <x>20</x>
        <y>120</y>
        <width>141</width>
-       <height>28</height>
+       <height>51</height>
       </rect>
      </property>
      <property name="text">
-      <string>Contorno</string>
+      <string>Analisis contornos</string>
      </property>
     </widget>
     <zorder>btnSegLocal</zorder>
@@ -206,7 +206,7 @@
      <x>0</x>
      <y>0</y>
      <width>1185</width>
-     <height>33</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArchivo">

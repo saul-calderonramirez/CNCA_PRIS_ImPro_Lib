@@ -57,7 +57,7 @@ public:
     ImageImPro* applyThreshold(ImageImPro* input, double threshold, double maxValue, ThresholdType typeThresh);
     ImageImPro* thresholdEqualsRGB(ImageImPro* ptrInput, RGB_VALUE threshold);
     ImageImPro** getCounturedObjectMask(ImageImPro* ptrMask, ImageImPro* ptrInput, int objectMaskTag);
-    vector<double> getDensityFunction(ImageImPro* ptrInput, ImageImPro* ptrMask, int layer);
+    vector<float> getDensityFunction(ImageImPro* ptrInput, ImageImPro* ptrMask, int layer);
     ~OpenImProLib_OpenCvImpl(){}
 };
 

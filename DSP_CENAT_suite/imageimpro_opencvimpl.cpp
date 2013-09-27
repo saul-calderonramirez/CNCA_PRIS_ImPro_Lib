@@ -214,28 +214,29 @@ void ImageImPro_OpenCvImpl::showImageOnWindow(char* ptrWinName){
 }
 
 ImageImPro* ImageImPro_OpenCvImpl::getHSV(){
-    cudaEvent_t	start, stop;
-
-    cudaEventCreate(&start);
-    cudaEventCreate(&stop);
-
-
     ImageImPro* ptrImHSV;
     Mat img_hsv,img_rgb;
     img_rgb = *(this->getMat());
-
     cvtColor(img_rgb,img_hsv,CV_RGB2HSV);
     ptrImHSV = new ImageImPro_OpenCvImpl(&img_hsv);
-    namedWindow("HSV", CV_WINDOW_AUTOSIZE);
-    imshow("HSV", img_hsv);
-    imwrite( "../hsvImage.jpg", img_hsv);
-    vector<Mat> hsv_planes;
-    split( img_hsv, hsv_planes );
-    hsv_planes[0]; // H channel
-    hsv_planes[1]; // S channel
-    hsv_planes[2]; // V channel
-
     return ptrImHSV;
+}
+
+ImageImPro* ImageImPro_OpenCvImpl::getLayer(int layer){
+    vector<Mat> planes;
+    Mat* ptrImage = this->getMat();
+    Mat image = *ptrImage;
+    split( image, planes );
+    planes[0]; // H channel
+    planes[1]; // S channel
+    planes[2]; // V channel
+  /*  namedWindow("HSV", CV_WINDOW_AUTOSIZE);
+    imshow("HSV",  planes[1]);
+    imwrite( "../capaH.jpg", planes[1]);*/
+    ImageImPro* ptrLayer;
+    ptrLayer = new ImageImPro_OpenCvImpl(&planes[layer]);
+    //delete ptrImage;
+    return ptrLayer;
 }
 
 ImageImPro_OpenCvImpl::~ImageImPro_OpenCvImpl(){

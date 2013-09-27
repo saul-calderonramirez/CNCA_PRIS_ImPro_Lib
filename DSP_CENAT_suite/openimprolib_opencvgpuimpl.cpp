@@ -3,11 +3,11 @@ using namespace gpu;
 OpenImProLib_OpenCVGPUimpl::OpenImProLib_OpenCVGPUimpl(){
 }
 
-extern void convert_to_hsv_wrapper(uchar4 *rgb, float4 *hsv, int width, int height);
+/*extern void convert_to_hsv_wrapper(uchar4 *rgb, float4 *hsv, int width, int height);*/
 
 ImageImPro* OpenImProLib_OpenCVGPUimpl::convertRGBToHSV(ImageImPro* input){
     // host
-        uchar4 *host_image, *host_out;
+   /*     uchar4 *host_image, *host_out;
 
 
         // device
@@ -47,14 +47,10 @@ ImageImPro* OpenImProLib_OpenCVGPUimpl::convertRGBToHSV(ImageImPro* input){
         printf("Time to compute hsv image with GPU: %3.1f ms\n", elapsed_time);
         cudaEventDestroy(start);
         cudaEventDestroy(stop);
-
-
-
-
         cudaFree(hsv);
         cudaFree(image);
         free(host_image);
-        free(host_out);
+        free(host_out);*/
 }
 
 /*

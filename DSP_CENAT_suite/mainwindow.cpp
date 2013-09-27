@@ -84,7 +84,8 @@ void MainWindow::on_btnLoadDefImage_clicked(){
 void MainWindow::on_btnContour_clicked(){
     try{
         cout << "hizo click en find contour" << endl;
-        this->ptrController->findCountour();
+        vector<float> density = this->ptrController->findCountour();
+        this->displayHistogram(density);
     }
     catch(Controller::ControllerException contExc){
         cout << contExc.what() << endl;
@@ -116,12 +117,12 @@ void MainWindow::on_btnGaussFilter_clicked(){
 
 
 
-void MainWindow::displayHOGHistogram(vector<float> descriptorValues){
-
+void MainWindow::displayHistogram(vector<float> descriptorValues){
     QVector<double> x(descriptorValues.size()), y(descriptorValues.size()); // initialize with entries 0..100
     float max = 0;
     for(int i = 0; i < descriptorValues.size(); ++i){
         y[i] = descriptorValues[i];
+        cout<<"current descriptor Value en el graficador: "<< descriptorValues[i] <<endl;
         x[i] = i;
         if(descriptorValues[i] > max){
             max = descriptorValues[i];
@@ -136,7 +137,7 @@ void MainWindow::displayHOGHistogram(vector<float> descriptorValues){
     this->ui->plotter->yAxis->setLabel("y");
     // set axes ranges, so we see all data:
     this->ui->plotter->xAxis->setRange(0, descriptorValues.size());
-    this->ui->plotter->yAxis->setRange(0, 1);
+    this->ui->plotter->yAxis->setRange(0, max);
     this->ui->plotter->replot();
 }
 

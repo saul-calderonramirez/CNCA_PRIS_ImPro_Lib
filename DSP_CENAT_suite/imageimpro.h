@@ -67,6 +67,7 @@ class ImageImPro{
         virtual void createImage(ImSize size, ImageImProDepth depth, int channels)=0;
         virtual ImageImPro* getGrayScale() = 0;
         virtual ImageImPro* getHSV() = 0;
+        virtual ImageImPro* getLayer(int layer) = 0;
         virtual QImage* getQImage() = 0;
         virtual Mat* getMat() = 0;
         virtual GpuMat* getGPUMat() = 0;

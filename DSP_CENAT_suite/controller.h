@@ -39,7 +39,7 @@ public:
     void applyFilterSobel()throw (ControllerException);
     void applyFilterGauss()throw (ControllerException);
     void convertToHSV()throw (ControllerException);
-    void findCountour()throw (ControllerException);
+    vector<float> findCountour()throw (ControllerException);
     void runBenchmarks()throw (ControllerException);
 
     ~Controller();

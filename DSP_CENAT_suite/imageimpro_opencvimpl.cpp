@@ -217,8 +217,11 @@ ImageImPro* ImageImPro_OpenCvImpl::getHSV(){
     ImageImPro* ptrImHSV;
     Mat img_hsv,img_rgb;
     img_rgb = *(this->getMat());
-    cvtColor(img_rgb,img_hsv,CV_RGB2HSV);
+    cvtColor(img_rgb, img_hsv,CV_RGB2HSV);
+
     ptrImHSV = new ImageImPro_OpenCvImpl(&img_hsv);
+
+    ptrImHSV->showImageOnWindow("HSV");
     return ptrImHSV;
 }
 

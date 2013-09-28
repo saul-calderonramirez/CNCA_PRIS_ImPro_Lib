@@ -58,6 +58,7 @@ public:
     ImageImPro* thresholdEqualsRGB(ImageImPro* ptrInput, RGB_VALUE threshold);
     ImageImPro** getCounturedObjectMask(ImageImPro* ptrMask, ImageImPro* ptrInput, int objectMaskTag);
     vector<float> getDensityFunction(ImageImPro* ptrInput, ImageImPro* ptrMask, int layer);
+    double compareHistogram(vector<float> hist1, vector<float> hist2, int mehtod);
     ~OpenImProLib_OpenCvImpl(){}
 };
 

@@ -229,24 +229,29 @@ ImageImPro** OpenImProLib_OpenCvImpl::getCounturedObjectMask(ImageImPro* ptrMask
 }
 
 vector<float> OpenImProLib_OpenCvImpl::getDensityFunction(ImageImPro* ptrInput, ImageImPro* ptrMask, int layer){
-    vector<float> histogram(256);
-    unsigned char value;
-    ptrInput->showImageOnWindow("Capa H recibida por getDensityFunction");
-    ptrMask->showImageOnWindow("Mascara recibida por getDensityFunction");
-    for(int x = 0; x < ptrInput->getSize().width; ++x){
-        for(int y = 0; y < ptrInput->getSize().height; ++y){
-            cout << "Mascara: x "<< x << " y: " << y << " valor " << (int)ptrMask->getPV(x, y) << endl;
-            if((unsigned char)ptrMask->getPV(x, y) == 255){
-                value = (unsigned char)ptrInput->getPV(x, y, layer);
-                histogram[value]++;
-            }
-        }
-    }
-    int N = ptrInput->getSize().width * ptrInput->getSize().height;
-    //Von mises approximation
-    for(int i = 0; i < 256; ++i){
-        histogram[i] = histogram[i]/N;
+    vector<float> histogram(180);
+    int histSize = 180;
+
+    /// Set the ranges ( for H )
+    float range[] = { 0, 180} ;
+    const float* histRange = { range };
+
+    bool uniform = true; bool accumulate = false;
+
+    Mat h_hist;
+
+    /// Compute the histogram:
+    calcHist( ptrInput->getMat(), 1, 0, *(ptrMask->getMat()), h_hist, 1, &histSize, &histRange);//, uniform, accumulate );
+    cout << "FILAS MAT HIST" << h_hist.rows << " COLS MAT HIST " << h_hist.cols << endl;
+    for(int i = 0; i < h_hist.rows; ++i){
+        histogram[i] = h_hist.at<int>(i, 0);
     }
 
     return histogram;
+}
+
+double OpenImProLib_OpenCvImpl::compareHistogram(vector<float> hist1, vector<float> hist2, int method){
+    /*InputArray inHist1
+    compareHist()*/
+
 }

@@ -54,6 +54,7 @@ public:
     ImageImPro** getCounturedObjectMask(ImageImPro* ptrMask, ImageImPro* ptrInput, int objectMaskTag){}
     vector<float> getDensityFunction(ImageImPro* ptrInput, ImageImPro* ptrMask, int layer){}
     ~OpenImProLib_OpenCVGPUimpl(){}
+     double compareHistogram(vector<float> hist1, vector<float> hist2, int mehtod){}
 };
 
 #endif

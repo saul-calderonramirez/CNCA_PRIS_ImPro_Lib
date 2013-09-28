@@ -122,7 +122,7 @@ void MainWindow::displayHistogram(vector<float> descriptorValues){
     float max = 0;
     for(int i = 0; i < descriptorValues.size(); ++i){
         y[i] = descriptorValues[i];
-        cout<<"current descriptor Value en el graficador: "<< descriptorValues[i] <<endl;
+
         x[i] = i;
         if(descriptorValues[i] > max){
             max = descriptorValues[i];

@@ -65,7 +65,7 @@ public:
     virtual ImageImPro** getCounturedObjectMask(ImageImPro* ptrMask, ImageImPro* ptrInput, int objectMaskTag) = 0;
 
     virtual vector<float> getDensityFunction(ImageImPro* ptrInput, ImageImPro* ptrMask, int layer) = 0;
-
+    virtual double compareHistogram(vector<float> hist1, vector<float> hist2, int mehtod) = 0;
     virtual ~OpenImProLib(){}
 };
 
